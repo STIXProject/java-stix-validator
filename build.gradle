@@ -8,16 +8,21 @@
  *
  * Running the valdiator locally at the default port:
  *
- * ./gradlew execute 
+ * ./gradlew stage
+ * ./build/install/java-stix-validator/bin/java-stix-validator
  *
- * To run at port 9090:
+ * To change the port set an sytem environment vraible sorta like this:
  *
- * ./gradlew -Dexec.args="9090"
- *
- *
+ * ./gradlew stage
+ * export PORT=9090
+ * ./build/install/java-stix-validator/bin/java-stix-validator
+ * 
  */
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin:'application'
+
+mainClassName = "org.mitre.stix.validator.App"
 
 repositories {
 	jcenter()
@@ -44,8 +49,5 @@ task wrapper(type: Wrapper) {
 	gradleVersion = '2.4'
 }
 
-task execute(type:JavaExec) {
-	main = project.mainClass
-	classpath = sourceSets.main.runtimeClasspath
-	systemProperty "port", port
+task stage(dependsOn: installDist) {
 }
