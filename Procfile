@@ -1,0 +1,1 @@
+web: build/install/java-stix-validator/bin/java-stix-validator
