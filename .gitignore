@@ -1,6 +1,4 @@
 build
-src/generated
 .classpath
 .project
 .settings/
-target
