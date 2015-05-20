@@ -1,0 +1,51 @@
+/*
+ * Copyright (c) 2015, The MITRE Corporation. All rights reserved.
+ * See LICENSE for complete terms.
+ *
+ * Java-STIX-Validator Gradle Buildscript
+ *
+ * nemonik (Michael Joseph Walsh <github.com@nemonik.com>)
+ *
+ * Running the valdiator locally at the default port:
+ *
+ * ./gradlew execute 
+ *
+ * To run at port 9090:
+ *
+ * ./gradlew -Dexec.args="9090"
+ *
+ *
+ */
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+	jcenter()
+	mavenCentral()
+	mavenLocal()
+	flatDir { dirs "libs" }
+}
+
+dependencies {
+	compile "com.sparkjava:spark-core:2.2"
+	compile "com.sparkjava:spark-template-jade:1.0.0"
+	compile 'org.mitre:stix:1.1.1'
+	compile 'org.mitre:stix:1.2.0'
+
+	testCompile "org.codehaus.groovy:groovy:2.4.3"
+	testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+}
+
+if (System.getProperty("exec.args")) {
+	port = System.getProperty("exec.args").split()[0]
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.4'
+}
+
+task execute(type:JavaExec) {
+	main = project.mainClass
+	classpath = sourceSets.main.runtimeClasspath
+	systemProperty "port", port
+}
