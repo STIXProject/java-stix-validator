@@ -10,7 +10,7 @@ import spark.ModelAndView;
 import spark.template.jade.JadeTemplateEngine;
 
 public class App {
-	private static final int PORT = System.getenv("OPENSHIFT_DIY_IP") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_IP")) : Integer.parseInt(System.getProperty("port"));
+	private static final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : Integer.parseInt(System.getProperty("port"));
 
 	public static void main(String[] args) {
 		
