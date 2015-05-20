@@ -45,9 +45,9 @@ if (System.getProperty("exec.args")) {
 	port = System.getProperty("exec.args").split()[0]
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '2.4'
-}
+//task wrapper(type: Wrapper) {
+//	gradleVersion = '2.4'
+//}
 
 task stage(dependsOn: installDist) {
 }
