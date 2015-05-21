@@ -1,0 +1,22 @@
+<div class="container">
+	<h1>STIX Validator</h1>
+
+	<!-- https://raw.githubusercontent.com/STIXProject/python-stix/master/examples/sample.xml -->
+
+	<p>
+	<label for="url">Validate by URL: </label>
+	</br />
+	<input placeholder="http://" data-ng-model="url"></input>
+	<br />
+	<button data-ng-click="validateURL()">Validate URL</button>
+	</p>
+	
+	<p>
+	<label for="xml">Validate by XML:</label>
+	<br/ >
+	<textarea rows="10" placeholder="<stix:STIX_Package>...</stix:STIX_Package>" data-ng-model="xml"></textarea>
+	<br />
+	<button data-ng-click="validateXML()">Validate XML</button>
+	</p>
+
+</div>
