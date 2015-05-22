@@ -1,1 +1,1 @@
-web: build/install/java-stix-validator/bin/java-stix-validator
+web: ./gradlew -PmainClass=org.mitre.stix.validator.App execute

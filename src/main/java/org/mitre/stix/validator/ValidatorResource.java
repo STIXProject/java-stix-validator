@@ -18,9 +18,9 @@ public class ValidatorResource {
 
 	private void setupEndpoints() {
 		post(API_CONTEXT + "/validate/url", "application/json", (request, response)
-				-> validatorService.validateURL(), new JsonTransformer());
+				-> validatorService.validateURL(request.body()), new JsonTransformer());
 		
 		post(API_CONTEXT + "/validate/string", "application/json", (request, response)
-				-> validatorService.validateXML(), new JsonTransformer());
+				-> validatorService.validateXML(request.body()), new JsonTransformer());
 	}
 }
