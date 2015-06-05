@@ -11,7 +11,7 @@ import org.xml.sax.SAXException;
 /**
  * Parsing and validating error handler
  * 
- * @author nemonik (Michael Joseph Walsh <github.com@nemonik.com>) *
+ * @author nemonik (Michael Joseph Walsh <github.com@nemonik.com>)
  */
 
 

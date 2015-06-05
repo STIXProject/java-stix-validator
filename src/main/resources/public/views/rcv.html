@@ -1,22 +1,47 @@
-<div class="container">
-	<h1>STIX Validator</h1>
+<h1 class="page-header">STIX Validator</h1>
+<p class="lead">Select the tab for the type of STIX validation you would like to perform.</p>
+<tabset>
+	<tab heading="Remote STIX Document">
+		<div style="padding: 10px;">
+			<form name="myForm">
+				<div class="form-group">
+					<label>URL:</label>
+					<input class="form-control" name="url" placeholder="http://" data-ng-model="stix.urlTab.url" ng-focus="reset()"></input>
+				</div>
+				<alert ng-show="stix.urlTab.alert" type="{{stix.urlTab.alert.type}}" close="closeAlert()">{{stix.urlTab.alert.msg}}</alert>
+				<button type="submit" class="btn btn-default" data-ng-click="validateURL()">Validate</button>
+			</form>
+		</div>
+		
+		<div collapse="stix.urlTab.results.fail.isCollapsed">
+			<div class="well-fail well-lg">
+				<h3>{{stix.urlTab.results.fail.msg}}</h3>
+				<br />
+				<div ng-show="stix.urlTab.results.fail.data.parseErrorMsg">
+					<label>Error Message: </label>
+					<pre class="error-pre">{{stix.urlTab.results.fail.data.parseErrorMsg}}</pre>
+				</div>
+			</div>
+		</div>
+		
+		<div collapse="stix.urlTab.results.success.isCollapsed">
+			<div class="well-success well-lg">
+				<h3>{{stix.urlTab.results.success.msg}}</h3>
+			</div>
+		</div>
 
-	<!-- https://raw.githubusercontent.com/STIXProject/python-stix/master/examples/sample.xml -->
-
-	<p>
-	<label for="url">Validate by URL: </label>
-	</br />
-	<input placeholder="http://" data-ng-model="url"></input>
-	<br />
-	<button data-ng-click="validateURL()">Validate URL</button>
-	</p>
-	
-	<p>
-	<label for="xml">Validate by XML:</label>
-	<br/ >
-	<textarea rows="10" placeholder="<stix:STIX_Package>...</stix:STIX_Package>" data-ng-model="xml"></textarea>
-	<br />
-	<button data-ng-click="validateXML()">Validate XML</button>
-	</p>
-
-</div>
+	</tab>
+	<tab heading="STIX Document Text">
+		<div style="padding: 10px;">
+			<form>
+				<div class="form-group">
+					<label>XML:</label>
+					</br />
+					<textarea rows="10" class="form-control text-area-wide" placeholder="<stix:STIX_Package>...</stix:STIX_Package>" data-ng-model="xml"></textarea>
+				</div>
+				<button type="submit" class="btn btn-default" data-ng-click="validateXML()">Validate</button>
+			</form>
+		</div>
+	</tab>
+	<tab heading="STIX Document File">SSTIX Document URL</tab>
+</tabset>
