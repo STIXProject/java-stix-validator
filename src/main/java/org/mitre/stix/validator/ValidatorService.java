@@ -58,9 +58,6 @@ public class ValidatorService implements ValidationErrorCallback {
 	 * @param versions
 	 *            The schema versions to create STIXSchema objects for.
 	 */
-	/**
-	 * @param versions
-	 */
 	private void loadSTIXSchemas(String... versions) {
 
 		stixSchemas = new HashMap<Version, Object>();
