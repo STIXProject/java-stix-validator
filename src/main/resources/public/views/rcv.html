@@ -3,13 +3,13 @@
 <tabset>
 	<tab heading="Remote STIX Document">
 		<div style="padding: 10px;">
-			<form name="myForm">
+			<form name="urlForm">
 				<div class="form-group">
 					<label>URL:</label>
-					<input class="form-control" name="url" placeholder="http://" data-ng-model="stix.urlTab.url" ng-focus="reset()"></input>
+					<input class="form-control" name="url" placeholder="http://" data-ng-model="stix.urlTab.url" ng-focus="reset('urlTab')"></input>
 				</div>
-				<alert ng-show="stix.urlTab.alert" type="{{stix.urlTab.alert.type}}" close="closeAlert()">{{stix.urlTab.alert.msg}}</alert>
-				<button type="submit" class="btn btn-default" data-ng-click="validateURL()">Validate</button>
+				<alert ng-show="stix.urlTab.alert" type="{{stix.urlTab.alert.type}}" close="closeAlert('urlTab')">{{stix.urlTab.alert.msg}}</alert>
+				<button type="submit" class="btn btn-default" data-ng-click="validate('urlTab', 'url')">Validate</button>
 			</form>
 		</div>
 		
@@ -33,15 +33,33 @@
 	</tab>
 	<tab heading="STIX Document Text">
 		<div style="padding: 10px;">
-			<form>
+			<form name="xmlForm">
 				<div class="form-group">
 					<label>XML:</label>
 					</br />
-					<textarea rows="10" class="form-control text-area-wide" placeholder="<stix:STIX_Package>...</stix:STIX_Package>" data-ng-model="xml"></textarea>
+					<textarea rows="10" class="form-control text-area-wide" placeholder="<stix:STIX_Package>...</stix:STIX_Package>" data-ng-model="stix.xmlTab.xml" ng-focus="reset('xmlTab')"></textarea>
 				</div>
-				<button type="submit" class="btn btn-default" data-ng-click="validateXML()">Validate</button>
+				<alert ng-show="stix.xmlTab.alert" type="{{stix.xmlTab.alert.type}}" close="closeAlert('xmlTab')">{{stix.xmlTab.alert.msg}}</alert>
+				<button type="submit" class="btn btn-default" data-ng-click="validate('xmlTab', 'xml')">Validate</button>
 			</form>
 		</div>
+
+		<div collapse="stix.xmlTab.results.fail.isCollapsed">
+			<div class="well-fail well-lg">
+				<h3>{{stix.xmlTab.results.fail.msg}}</h3>
+				<br />
+				<div ng-show="stix.xmlTab.results.fail.data.parseErrorMsg">
+					<label>Error Message: </label>
+					<pre class="error-pre">{{stix.xmlTab.results.fail.data.parseErrorMsg}}</pre>
+				</div>
+			</div>
+		</div>
+		
+		<div collapse="stix.xmlTab.results.success.isCollapsed">
+			<div class="well-success well-lg">
+				<h3>{{stix.xmlTab.results.success.msg}}</h3>
+			</div>
+		</div>
 	</tab>
-	<tab heading="STIX Document File">SSTIX Document URL</tab>
+	<tab heading="STIX Document File">STIX Document File</tab>
 </tabset>

@@ -49,7 +49,8 @@ public class ValidatorService implements ValidationErrorCallback {
 
 	private boolean validates;
 
-	public static final String[] DEFAULT_SUPORTED_SCHEMAS = { "1.1.1", "1.2.0" };
+	public static final Version[] DEFAULT_SUPORTED_SCHEMAS = {
+			Version.valueOf("1.1.1"), Version.valueOf("1.2.0") };
 
 	/**
 	 * Uses individual ClassLoaders to load and create individual STIXSchema
@@ -58,14 +59,12 @@ public class ValidatorService implements ValidationErrorCallback {
 	 * @param versions
 	 *            The schema versions to create STIXSchema objects for.
 	 */
-	private void loadSTIXSchemas(String... versions) {
+	private void loadSTIXSchemas(Version... versions) {
 
 		stixSchemas = new HashMap<Version, Object>();
 
-		for (String version : versions) {
+		for (Version version : versions) {
 			try {
-
-				Version semVer = Version.valueOf(version);
 
 				ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
 
@@ -110,7 +109,7 @@ public class ValidatorService implements ValidationErrorCallback {
 				System.out.println("Created STIXSchema for v " + version
 						+ " instance");
 
-				stixSchemas.put(semVer, instance);
+				stixSchemas.put(version, instance);
 
 			} catch (ClassNotFoundException | SecurityException
 					| IllegalAccessException | IllegalArgumentException
@@ -192,32 +191,19 @@ public class ValidatorService implements ValidationErrorCallback {
 
 		if (version != "") {
 
-			Version lookForVersion;
+			Version lookForVersion = null;
 
 			try {
 				lookForVersion = Version.valueOf(version);
-			} catch (UnexpectedCharacterException e) { // handle versions
-														// not in proper
-														// SemVer form
-														// (i.e., "1.2")
-														// or retrieve
-														// closest known
-														// schema
-				lookForVersion = Version.valueOf("1.2.0");
-				String digits[] = version.trim().split("\\.");
-				if (digits.length == 1) {
-					lookForVersion = Version.forIntegers(Integer
-							.parseInt(digits[0]));
-				} else if (digits.length == 2) {
-					lookForVersion = Version.forIntegers(
-							Integer.parseInt(digits[0]),
-							Integer.parseInt(digits[1]));
-				} else {
-					lookForVersion = Version.forIntegers(
-							Integer.parseInt(digits[0]),
-							Integer.parseInt(digits[1]),
-							Integer.parseInt(digits[2]));
+			} catch (UnexpectedCharacterException uce) {
+				// patch versioning not being Semantic Versioning 2.0.0 compliant
+				if (uce.toString().equals("Unexpected character 'EOI(null)' at position '3', expecting '[DOT]'")) {
+					lookForVersion = Version.valueOf(version + ".0");
 				}
+			} catch (Exception e) {
+				System.out.println(e.getClass().getName() + ": " + e);
+				return new ValidationResult().setParseErrorMsg(e.getMessage())
+						.setValidates(Boolean.toString(false));
 			}
 
 			System.out.println("Version of root element is " + version);
