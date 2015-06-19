@@ -2,3 +2,7 @@ build
 .classpath
 .project
 .settings/
+npm-debug.log
+/.gradle
+/node_modules
+/bower_components
