@@ -1,0 +1,106 @@
+<h1 class="page-header">Java STIX Validator</h1>
+<p class="lead">
+	Select the tab for the method of Java STIX validation you would like to perform.
+</p>
+<div class="row">
+	<div class="col-md-12">
+		<div class="pull-right">
+			<button class="btn btn-info" ng-click="reset()">
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Reset this tab
+			</button>
+		</div>
+		<tabset>
+			<tab heading="Remote STIX Document" ng-click="onTabSelect('urlTab')">
+				<div style="padding: 10px;">
+					<form name="urlForm">
+						<div class="form-group">
+							<label>URL:</label>
+							<input class="form-control" name="url" placeholder="http://" data-ng-model="stix.urlTab.url">
+							</input>
+						</div>
+						<alert ng-show="stix.urlTab.alert" type="{{stix.urlTab.alert.type}}" close="closeAlert('urlTab')">
+							{{stix.urlTab.alert.msg}}
+						</alert>
+						<button type="submit" class="btn btn-default" data-ng-click="validate('urlTab', 'url')">
+							Validate
+						</button>
+					</form>
+				</div>
+
+				<div collapse="stix.urlTab.results.fail.isCollapsed">
+					<div class="well-fail well-lg">
+						<h3>{{stix.urlTab.results.fail.msg}}</h3>
+						<br />
+						<div ng-show="stix.urlTab.results.fail.data.parseErrorMsg">
+							<label>Error Message: </label>
+							<pre class="error-pre">{{stix.urlTab.results.fail.data.parseErrorMsg}}</pre>
+						</div>
+					</div>
+				</div>
+
+				<div collapse="stix.urlTab.results.success.isCollapsed">
+					<div class="well-success well-lg">
+						<label>{{stix.urlTab.results.success.msg}}</label>
+					</div>
+				</div>
+
+			</tab>
+			<tab heading="STIX Document Text" ng-click="onTabSelect('xmlTab')">
+				<div style="padding: 10px;">
+					<form name="xmlForm">
+						<div class="form-group">
+							<label>XML:</label>
+							</br />
+							<textarea rows="10" class="form-control text-area-wide" placeholder="<stix:STIX_Package>...</stix:STIX_Package>" data-ng-model="stix.xmlTab.xml"></textarea>
+						</div>
+						<alert ng-show="stix.xmlTab.alert" type="{{stix.xmlTab.alert.type}}" close="closeAlert('xmlTab')">
+							{{stix.xmlTab.alert.msg}}
+						</alert>
+						<button type="submit" class="btn btn-default" data-ng-click="validate('xmlTab', 'xml')">
+							Validate
+						</button>
+					</form>
+				</div>
+
+				<div collapse="stix.xmlTab.results.fail.isCollapsed">
+					<div class="well-fail well-lg">
+						<h3>{{stix.xmlTab.results.fail.msg}}</h3>
+						<br />
+						<div ng-show="stix.xmlTab.results.fail.data.parseErrorMsg">
+							<label>Error Message: </label>
+							<pre class="error-pre">{{stix.xmlTab.results.fail.data.parseErrorMsg}}</pre>
+						</div>
+					</div>
+				</div>
+
+				<div collapse="stix.xmlTab.results.success.isCollapsed">
+					<div class="well-success well-lg">
+						<label>{{stix.xmlTab.results.success.msg}}</label>
+					</div>
+				</div>
+			</tab>
+			<tab heading="STIX Document File" ng-click="onTabSelect('fileTab')">
+				<div style="padding: 10px;">
+					<div ngf-drop ng-model="files" class="upload-drop-zone"
+					ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+					ngf-accept="'application/xml,text/xml'">
+						Drop STIX XML files here
+					</div>
+					<div ngf-no-file-drop>
+						<span class="glyphicon glyphicon-save" aria-hidden="true"></span><br/>
+						File Drag/Drop is not supported for this browser
+					</div>
+					<div collapse="stix.fileTab.files">
+						Files:
+						<ul>
+							<li ng-repeat="f in stix.fileTab.files" style="font:smaller">
+								{{f.name}}
+							</li>
+						</ul>
+						Upload Log:
+						<pre>{{log}}</pre>
+					</div>
+				</div>
+			</tab>
+		</tabset>
+	</div>
