@@ -15,7 +15,7 @@ public class App {
 		
 		port(PORT);
 		staticFileLocation("/public");
-		
+
 		new ValidatorResource(new ValidatorService());
 	}
 }

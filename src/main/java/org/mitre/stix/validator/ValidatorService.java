@@ -241,6 +241,20 @@ public class ValidatorService implements ValidationErrorCallback {
 	}
 
 	/**
+	 * Validates and XML file.
+	 * 
+	 * @param xmlText
+	 * @return
+	 */
+	public ValidationResult validateFile(String xmlFileText) {
+		
+		System.out.println(xmlFileText);
+		
+		return new ValidationResult().setParseErrorMsg("nothing to see here")
+				.setValidates(Boolean.toString(true));
+	}
+
+	/**
 	 * Creates a Validator Service
 	 * 
 	 * @param args

@@ -37,5 +37,8 @@ public class ValidatorResource {
 		
 		post(API_CONTEXT + "/validate/xml", "application/json", (request, response)
 				-> validatorService.validateXML(request.body()), new JsonTransformer());
+
+		post(API_CONTEXT + "/validate/file", "application/json", (request, response)
+				-> validatorService.validateFile(request.body()), new JsonTransformer());
 	}
 }
