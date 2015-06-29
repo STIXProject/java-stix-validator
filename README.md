@@ -7,7 +7,7 @@ java-stix-validator is being developed under the official [STIXProject][stix pro
 
 For more information, see [http://stix.mitre.org/][stix].
 
-[![Build Status](https://travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator)
+[![Build Status](https://travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator) [![Heroku](https://heroku-deployment-badges.herokuapp.com/?app=agile-journey-9583&style=flat)
 
 ## <a name="overview"></a>Overview
 
@@ -16,6 +16,9 @@ java-stix is not a one-for-one replacement for [python-stix][python-stix] neithe
 is [python-based stix-validator][stix-validator].  Meaning: this validator does
 not validate for best practices. The validator supports v1.1.1 and v1.2.0 releases 
 of the STIX schema, and can be modified to support follow-on releases.
+
+An [instance of the validator is deployed to Heroku][heroku instance] or you can 
+[clone, build, and run an instance your own box](#building).
 
 ## <a name="versioning"></a>Versioning
 
@@ -176,9 +179,10 @@ you can cut-and-paste the whole text of STIX document and submit for validation.
 can drag and drop one or more STIX documents at a time into the dashed-line box for 
 validation.
 
+[heroku instance]:http://agile-journey-9583.herokuapp.com/#/
 [bower]: http://bower.io/
 [node and npm]: https://nodejs.org/
-[Jetty] http://www.eclipse.org/jetty/
+[Jetty]: http://www.eclipse.org/jetty/
 [AngularJS]: https://angularjs.org/
 [sparkjava]: http://sparkjava.com/
 [localhost]: http://localhost:8080
