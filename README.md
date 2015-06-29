@@ -20,7 +20,7 @@ of the STIX schema, and can be modified to support follow-on releases.
 ## <a name="versioning"></a>Versioning
 
 Releases of java-stix-validator will comply with the Semantic Versioning specification 
-at  [http://semver.org/][semver]. Java-stix-validator is currently under active development; 
+at [http://semver.org/][semver]. Java-stix-validator is currently under active development; 
 see TODO.txt for a tentative roadmap.  Releases will be announced on the [STIX 
 discussion list][list]. 
 
@@ -176,14 +176,14 @@ you can cut-and-paste the whole text of STIX document and submit for validation.
 can drag and drop one or more STIX documents at a time into the dashed-line box for 
 validation.
 
-[bower] http://bower.io/
-[node and npm] https://nodejs.org/
+[bower]: http://bower.io/
+[node and npm]: https://nodejs.org/
 [Jetty] http://www.eclipse.org/jetty/
-[AngularJS] https://angularjs.org/
-[sparkjava] http://sparkjava.com/
-[localhost] http://localhost:8080
-[python-stix] https://github.com/STIXProject/python-stix
-[stix-validator] https://github.com/STIXProject/stix-validator
+[AngularJS]: https://angularjs.org/
+[sparkjava]: http://sparkjava.com/
+[localhost]: http://localhost:8080
+[python-stix]: https://github.com/STIXProject/python-stix
+[stix-validator]: https://github.com/STIXProject/stix-validator
 [list]: https://stix.mitre.org/community/registration.html
 [stix project]: http://stixproject.github.io/
 [stix]: http://stix.mitre.org/
