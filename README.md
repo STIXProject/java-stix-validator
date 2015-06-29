@@ -151,7 +151,7 @@ brevity, but if you are on Windows you can run Gradle via:
 
 <a name="Running"></a>Running
 
-Once built the validator can be run via
+Once built the validator can be run via:
 
 	./build/install/java-stix-validator/bin/java-stix-validator
 
@@ -185,3 +185,5 @@ validation.
 [python-stix] https://github.com/STIXProject/python-stix
 [stix-validator] https://github.com/STIXProject/stix-validator
 [list]: https://stix.mitre.org/community/registration.html
+[stix project]: http://stixproject.github.io/
+[stix]: http://stix.mitre.org/
