@@ -68,8 +68,11 @@ task installBower(type: NodeTask, dependsOn: npmPackages) {
 task syncJavascript(type: Sync, dependsOn: installBower) {
 	from 'bower_components'
 	into 'src/main/resources/public/js/bower_components'
-	include 'angular*/*.min.js'
-	include 'ng-file-upload/*.min.js'
+	include 'angular*/*.min.js*'
+	include 'ng-file-upload/*.min.js*'
+	include 'angular-spinner/angular-spinner.min.js*'
+	include 'angular-loading-spinner/angular-loading-spinner.js'
+	include 'spin.js/spin.js'
 	exclude 'ng-file-upload/ng-file-upload-all.min.js'
 }
 
@@ -99,6 +102,9 @@ dependencies {
 	compile 'com.sparkjava:spark-core:2.2'
 	compile 'org.slf4j:slf4j-simple:1.7.12'
 	compile 'com.google.code.gson:gson:2.3.1'
+	
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.5.4'
+
 	compile 'org.springframework:spring-core:4.1.4.RELEASE'
 	compile 'commons-io:commons-io:2.4'
 	compile 'com.github.zafarkhaja:java-semver:0.9.0'

@@ -11,31 +11,47 @@ package org.mitre.stix.validator;
  *
  */
 public class ValidationResult {
-	String parseErrorMsg;
-	String validates;
-	String xmlText;
-	String xmlURL;
+	private String parseErrorMsg;
+	private String validates;
+	private String xmlText;
+	private String xmlURL;
+	private String filename;
+
+	@Override
+	public String toString() {
+		return "ValidationResult [parseErrorMsg=" + parseErrorMsg
+				+ ", validates=" + validates + ", xmlText=" + xmlText
+				+ ", xmlURL=" + xmlURL + ", filename=" + filename + "]";
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public String getParseError() {
+		return parseErrorMsg;
+	}
 
 	public String getXmlText() {
 		return xmlText;
-	}
-
-	public ValidationResult setXmlText(String xmlText) {
-		this.xmlText = xmlText;
-		return this;
 	}
 
 	public String getXmlURL() {
 		return xmlURL;
 	}
 
-	public ValidationResult setXmlURL(String xmlURL) {
-		this.xmlURL = xmlURL;
+	public String isValidates() {
+		return validates;
+	}
+
+	public ValidationResult setFilename(String filename) {
+		this.filename = filename;
 		return this;
 	}
 
-	public String isValidates() {
-		return validates;
+	public ValidationResult setParseErrorMsg(String parseErrorMsg) {
+		this.parseErrorMsg = parseErrorMsg;
+		return this;
 	}
 
 	public ValidationResult setValidates(String validates) {
@@ -43,12 +59,13 @@ public class ValidationResult {
 		return this;
 	}
 
-	public String getParseError() {
-		return parseErrorMsg;
+	public ValidationResult setXmlText(String xmlText) {
+		this.xmlText = xmlText;
+		return this;
 	}
 
-	public ValidationResult setParseErrorMsg(String parseErrorMsg) {
-		this.parseErrorMsg = parseErrorMsg;
+	public ValidationResult setXmlURL(String xmlURL) {
+		this.xmlURL = xmlURL;
 		return this;
 	}
 }

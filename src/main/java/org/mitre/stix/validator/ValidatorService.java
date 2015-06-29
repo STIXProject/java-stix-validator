@@ -17,6 +17,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -32,6 +33,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.zafarkhaja.semver.UnexpectedCharacterException;
 import com.github.zafarkhaja.semver.Version;
 
@@ -41,13 +43,9 @@ import com.github.zafarkhaja.semver.Version;
  * @author nemonik (Michael Joseph Walsh <github.com@nemonik.com>)
  *
  */
-public class ValidatorService implements ValidationErrorCallback {
+public class ValidatorService {
 
 	private HashMap<Version, Object> stixSchemas;
-
-	private String parseErrorMsg;
-
-	private boolean validates;
 
 	public static final Version[] DEFAULT_SUPORTED_SCHEMAS = {
 			Version.valueOf("1.1.1"), Version.valueOf("1.2.0") };
@@ -103,8 +101,9 @@ public class ValidatorService implements ValidationErrorCallback {
 				Method setValidationErrorHandlerMethod = instance.getClass()
 						.getMethod("setValidationErrorHandler",
 								ErrorHandler.class);
+
 				setValidationErrorHandlerMethod.invoke(instance,
-						new ValidationErrorHandler(this));
+						new Object[] { null });
 
 				System.out.println("Created STIXSchema for v " + version
 						+ " instance");
@@ -161,14 +160,16 @@ public class ValidatorService implements ValidationErrorCallback {
 	 */
 	public ValidationResult validateURL(String spec) {
 
+		System.out.println(spec);
+
 		try {
 			URL url = new URL(spec);
 
 			return this.validateXML(IOUtils.toString(url.openStream()));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		} catch (Exception e) {
+			return new ValidationResult().setParseErrorMsg(e.getMessage())
+					.setValidates(Boolean.toString(false));
 		}
-
 	}
 
 	/**
@@ -179,7 +180,8 @@ public class ValidatorService implements ValidationErrorCallback {
 	 * @return The results of the validation.
 	 */
 	public ValidationResult validateXML(String xmlText) {
-		this.parseErrorMsg = "";
+
+		boolean validates = false;
 
 		String version;
 		try {
@@ -196,19 +198,18 @@ public class ValidatorService implements ValidationErrorCallback {
 			try {
 				lookForVersion = Version.valueOf(version);
 			} catch (UnexpectedCharacterException uce) {
-				// patch versioning not being Semantic Versioning 2.0.0 compliant
-				if (uce.toString().equals("Unexpected character 'EOI(null)' at position '3', expecting '[DOT]'")) {
+				// patch versioning not being Semantic Versioning 2.0.0
+				// compliant
+				if (uce.toString()
+						.equals("Unexpected character 'EOI(null)' at position '3', expecting '[DOT]'")) {
 					lookForVersion = Version.valueOf(version + ".0");
 				}
 			} catch (Exception e) {
-				System.out.println(e.getClass().getName() + ": " + e);
 				return new ValidationResult().setParseErrorMsg(e.getMessage())
 						.setValidates(Boolean.toString(false));
 			}
 
-			System.out.println("Version of root element is " + version);
-
-			validates = false;
+			//System.out.println("Version of root element is " + version);
 
 			for (Version knownVersion : stixSchemas.keySet()) {
 				if (lookForVersion.equals(knownVersion)) {
@@ -222,22 +223,50 @@ public class ValidatorService implements ValidationErrorCallback {
 								xmlText);
 						break;
 
-					} catch (NoSuchMethodException | SecurityException
-							| IllegalAccessException | IllegalArgumentException
-							| InvocationTargetException e) {
-						new RuntimeException(e);
-					}
-					System.out.println("msg = " + parseErrorMsg);
+					} catch (InvocationTargetException e) {
 
-				} else {
-					System.out.println(version + " not equal to "
-							+ knownVersion);
+						String errorMsg = null;
+						if (e.getTargetException().getClass().getName()
+								.equals("org.xml.sax.SAXParseException")) {
+
+							SAXParseException saxParseException = (SAXParseException) e
+									.getTargetException();
+
+							errorMsg = "SAXParseException:\n" + "\tPublic ID: "
+									+ saxParseException.getPublicId()
+									+ System.lineSeparator() + "\tSystem ID: "
+									+ saxParseException.getSystemId()
+									+ System.lineSeparator() + "\tLine     : "
+									+ saxParseException.getLineNumber()
+									+ System.lineSeparator() + "\tColumn   : "
+									+ saxParseException.getColumnNumber()
+									+ System.lineSeparator() + "\tMessage  : "
+									+ saxParseException.getMessage();
+						} else {
+							errorMsg = e.getTargetException().getClass()
+									.getName()
+									+ ":\n"
+									+ "\t"
+									+ e.getTargetException().getMessage();
+						}
+
+						return new ValidationResult()
+								.setParseErrorMsg(errorMsg).setValidates(
+										Boolean.toString(false));
+
+					} catch (IllegalAccessException | IllegalArgumentException
+							| NoSuchMethodException | SecurityException e) {
+						System.out.println(e + " : " + e.getMessage());
+						return new ValidationResult().setParseErrorMsg(
+								e.getMessage()).setValidates(
+								Boolean.toString(false));
+					}
 				}
 			}
 		}
 
-		return new ValidationResult().setParseErrorMsg(parseErrorMsg)
-				.setValidates(Boolean.toString(validates));
+		return new ValidationResult().setParseErrorMsg("").setValidates(
+				Boolean.toString(validates));
 	}
 
 	/**
@@ -246,37 +275,36 @@ public class ValidatorService implements ValidationErrorCallback {
 	 * @param xmlText
 	 * @return
 	 */
-	public ValidationResult validateFile(String xmlFileText) {
-		
-		System.out.println(xmlFileText);
-		
-		return new ValidationResult().setParseErrorMsg("nothing to see here")
-				.setValidates(Boolean.toString(true));
+	@SuppressWarnings("unchecked")
+	public ValidationResult validateFile(String xmlFileData) {
+
+		Map<String, Object> data;
+
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			data = mapper.readValue(xmlFileData, Map.class);
+
+			ValidationResult result = this
+					.validateXML((String) data.get("xml"));
+
+			result.setFilename((String) data.get("name"));
+
+			return result;
+
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ValidationResult().setParseErrorMsg(e.getMessage())
+					.setValidates(Boolean.toString(false));
+		}
 	}
 
 	/**
-	 * Creates a Validator Service
+	 * Creates a STIX Validator Service
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		new ValidatorService();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.mitre.stix.validator.ValidationErrorCallback#methodToCallBack(java
-	 * .lang.String, org.xml.sax.SAXParseException)
-	 */
-	@Override
-	public void methodToCallBack(String type, SAXParseException e) {
-		System.out.println("called callback");
-		this.parseErrorMsg = "SAXParseException " + type + "\n"
-				+ "\tPublic ID: " + e.getPublicId() + "\n" + "\tSystem ID: "
-				+ e.getSystemId() + "\n" + "\tLine: " + e.getLineNumber()
-				+ "\n" + "\tColumn   : " + e.getColumnNumber() + "\n"
-				+ "\tMessage  : " + e.getMessage() + "\n";
+		System.out.println("STIX Validator Service.");
 	}
 }
