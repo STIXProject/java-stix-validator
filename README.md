@@ -7,7 +7,7 @@ java-stix-validator is being developed under the official [STIXProject][stix pro
 
 For more information, see [http://stix.mitre.org/][stix].
 
-[![Circle CI](https://circleci.com/gh/STIXProject/java-stix-validator.svg?style=svg)](https://circleci.com/gh/STIXProject/java-stix-validator) [![Build Status](https://travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator)
+[![Build Status](https://travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator)
 
 ## <a name="overview"></a>Overview
 
