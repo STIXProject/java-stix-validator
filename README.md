@@ -1,6 +1,6 @@
 # <a name="intro"></a>java-stix-validator
 
-A Single Page Application and microservice for validating STIX (Structured Threat Information eXpression) 
+A microservice and Single Page Application for validating STIX (Structured Threat Information eXpression) 
 documents.
 
 java-stix-validator is being developed under the official [STIXProject][stix project]
@@ -11,7 +11,7 @@ For more information, see [http://stix.mitre.org/][stix].
 
 ## <a name="overview"></a>Overview
 
-The validator uses the validation found java-stix to perform vaidation. As 
+The validator uses the validation found java-stix to validate STIX documents. As 
 java-stix is not a one-for-one replacement for [python-stix][python-stix] neither 
 is [python-based stix-validator][stix-validator].  Meaning: this validator does
 not validate for best practices. The validator supports v1.1.1 and v1.2.0 releases 
