@@ -31,13 +31,13 @@
 FROM java:8
 
 # File Maintainer
-MAINTAINER Michael Joseph Walsh
+MAINTAINER STIX Project, The MITRE Corporation
 
 # Update
 RUN apt-get -y update
 
 # Cannot run bower as root so we will need to install as another user
-RUN adduser --disabled-password --gecos '' nemonik  && adduser nemonik sudo && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN adduser --disabled-password --gecos '' stix  && adduser stix sudo && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Copy java-stix-validator project into the container
 WORKDIR /home/stix
