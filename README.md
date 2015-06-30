@@ -210,3 +210,4 @@ validation.
 [list]: https://stix.mitre.org/community/registration.html
 [stix project]: http://stixproject.github.io/
 [stix]: http://stix.mitre.org/
+[semver]: http://semver.org/
