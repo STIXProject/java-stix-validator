@@ -11,11 +11,11 @@
 # If you have Docker installed, from the root of the project run
 # the following to create a container image for this Dockerfile via:
 #
-# docker build -t nemonik/validator .
+# docker build -t stix/validator .
 #
 # With the image is built, start a container with:
 #
-# docker run -d -p 8080:8080 nemonik/validator
+# docker run -d -p 8080:8080 stix/validator
 #
 # If you're using boot2docker, you will need to access via VM’s 
 # host only interface IP address:
