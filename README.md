@@ -7,18 +7,19 @@ java-stix-validator is being developed under the official [STIXProject][stix pro
 
 For more information, see [http://stix.mitre.org/][stix].
 
-[![Build Status](https://travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator) [![Heroku](https://heroku-deployment-badges.herokuapp.com/?app=agile-journey-9583&style=flat)
+[![Build Status](https://api.travis-ci.org/nemonik/java-stix-validator.svg)](https://travis-ci.org/nemonik/java-stix-validator) [![Heroku](https://heroku-deployment-badges.herokuapp.com/?app=agile-journey-9583&style=flat)](http://agile-journey-9583.herokuapp.com)
 
 ## <a name="overview"></a>Overview
 
-The validator uses the validation found java-stix to validate STIX documents. As 
-java-stix is not a one-for-one replacement for [python-stix][python-stix] neither 
-is [python-based stix-validator][stix-validator].  Meaning: this validator does
-not validate for best practices. The validator supports v1.1.1 and v1.2.0 releases 
-of the STIX schema, and can be modified to support follow-on releases.
+The validator uses java-stix to validate STIX documents. As java-stix is not a 
+one-for-one replacement for [python-stix][python-stix] neither is 
+[python-based stix-validator][stix-validator].  Meaning: this validator does
+not validate for best practices, and may pass documents [python-based stix-validator][stix-validator] 
+may fail. The validator supports v1.1.1 and v1.2.0 releases of the STIX schema, and can 
+be modified to support follow-on releases.
 
-An [instance of the validator is deployed to Heroku][heroku instance] or you can 
-[clone, build, and run an instance your own box](#building).
+An [instance of the validator is deployed to Heroku][heroku instance] and available for
+you to use, or you can [clone, build, and run an instance your own box](#building).
 
 ## <a name="versioning"></a>Versioning
 
@@ -135,7 +136,7 @@ java-stix-validator builds under Java8.
 
 Clone the java-stix-validator project via:
 
-	git clone https://github.com/STIXProject/java-stix-project.git
+	git clone https://github.com/nemonik/java-stix-project.git
 
 ### <a name="gradle_wrapper"></a>Using the Gradle Wrapper to build
 
@@ -170,6 +171,24 @@ The shell output will look like the following:
 
 Once, started open [http://localhost:8080][localhost] in your Web browser of choice.
 
+### <a name="building_via_docker"></a>Building via the Dockerfile
+
+Alternatively, if you have Docker installed, from the root of the project run 
+the following to create a container image for this Dockerfile via:
+
+	docker build -t nemonik/validator .
+
+Then create a container using the image you just created via:
+
+	docker run -t -i -p 8080:8080 java_stix_validator
+
+If you're using boot2docker, you will need to access via VM’s host only interface IP 
+address:
+
+	boot2docker ip
+
+And then point your browser to http://$(boot2docker ip):8080 vice https://localhost:8080
+
 ## <a name="using"></a>Using
 
 Use the tab to select the means for submitting your STIX document(s) for validation.
@@ -179,7 +198,7 @@ you can cut-and-paste the whole text of STIX document and submit for validation.
 can drag and drop one or more STIX documents at a time into the dashed-line box for 
 validation.
 
-[heroku instance]:http://agile-journey-9583.herokuapp.com/#/
+[heroku instance]:http://agile-journey-9583.herokuapp.com
 [bower]: http://bower.io/
 [node and npm]: https://nodejs.org/
 [Jetty]: http://www.eclipse.org/jetty/
