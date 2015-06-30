@@ -6,6 +6,12 @@ import spark.ResponseTransformer;
 
 import java.util.HashMap;
 
+/**
+ * Used to transform the ValidationResuts into json.
+ * 
+ * @author nemonik (Michael Joseph Walsh <github.com@nemonik.com>)
+ *
+ */
 public class JsonTransformer implements ResponseTransformer {
 
 	private Gson gson = new Gson();

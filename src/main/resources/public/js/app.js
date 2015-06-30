@@ -45,9 +45,6 @@ app.controller(
 			$scope.reset = function(tab) {
 				if (typeof tab === 'undefined') {
 					tab = $scope.selectedTab
-					console.log("called reset() on tab " + tab);
-				} else {
-					console.log("called reset() with " + tab);
 				}
 				if ((tab =='urlTab') || (tab =='xmlTab')) {
 					$scope.stix[tab] = {
@@ -167,7 +164,7 @@ app.controller(
 							.success(
 									function(data, status, headers,
 											config) {
-										console.log("Success:" + JSON.stringify(data));
+										console.log("Success");
 										if (data.validates === "true") {
 											$scope.stix.fileTab.results.push({
 												msg : "Passes validation.",
@@ -181,8 +178,7 @@ app.controller(
 									.error(
 											function(data, status, headers,
 													config) {
-												console.log('Error: '
-														+ data);
+												console.log("Error: " + data);
 											});
 						};
 

@@ -7,7 +7,12 @@ package org.mitre.stix.validator;
 import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
-
+/**
+ * The java-stix validator application
+ * 
+ * @author nemonik (Michael Joseph Walsh <github.com@nemonik.com>)
+ *
+ */
 public class App {
 	private static final int PORT = System.getenv("PORT") != null ? Integer.parseInt(System.getenv("PORT")) : 8080;
 
