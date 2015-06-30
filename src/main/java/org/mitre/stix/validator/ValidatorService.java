@@ -270,7 +270,7 @@ public class ValidatorService {
 	}
 
 	/**
-	 * Validates and XML file.
+	 * Validates an XML file.
 	 * 
 	 * @param xmlText
 	 * @return

@@ -1,4 +1,5 @@
 package org.mitre.stix.validator;
+
 import com.google.gson.Gson;
 
 import spark.Response;
@@ -21,7 +22,7 @@ public class JsonTransformer implements ResponseTransformer {
 		if (model instanceof Response) {
 			return gson.toJson(new HashMap<>());
 		}
-		
+
 		return gson.toJson(model);
 	}
 }

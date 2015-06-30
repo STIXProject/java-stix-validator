@@ -32,7 +32,7 @@ discussion list][list].
 If you have questions about how to use java-stix-validator, please direct these to 
 the [STIX discussion list][list].
 
-## <a name="contribute"></a>Contributing to java-stix?
+## <a name="contribute"></a>Contributing to java-stix-validator?
 
 We'd welcome you contributing to java-stix-validator. Read the [CONTRIBUTING.MD](CONTRIBUTING.MD) for guidlines.
 
@@ -174,6 +174,12 @@ The shell output will look like the following:
 	[Thread-1] INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@4ab75171{HTTP/1.1}{0.0.0.0:8080}
 
 Once, started open [http://localhost:8080][localhost] in your Web browser of choice.
+
+Optionally, you can run the validator at a port other than the default of `8080`
+by setting an environmental variable like so:
+
+	export PORT=9090
+	./build/install/java-stix-validator/bin/java-stix-validator
 
 ### <a name="building_via_docker"></a>Building via the Dockerfile
 
