@@ -1,6 +1,5 @@
 ############################################################
 # A Dockerfile used to create a java-stix build container
-# based on Ubunu.
 #
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE for complete terms.
