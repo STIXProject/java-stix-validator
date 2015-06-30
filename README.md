@@ -32,6 +32,10 @@ discussion list][list].
 If you have questions about how to use java-stix-validator, please direct these to 
 the [STIX discussion list][list].
 
+## <a name="contribute"></a>Contributing to java-stix?
+
+We'd welcome you contributing to java-stix-validator. Read the [CONTRIBUTING.MD](CONTRIBUTING.MD) for guidlines.
+
 ## <a name="how-does-it-work"></a>How does it work.
 
 The microservice backend in written in the [Spark Framework ][sparkjava], a Sinatra-like 
