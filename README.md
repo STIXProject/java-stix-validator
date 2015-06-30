@@ -176,11 +176,11 @@ Once, started open [http://localhost:8080][localhost] in your Web browser of cho
 Alternatively, if you have Docker installed, from the root of the project run 
 the following to create a container image for this Dockerfile via:
 
-	docker build -t nemonik/validator .
+	docker build -t stix/validator .
 
 Then create a container using the image you just created via:
 
-	docker run -t -i -p 8080:8080 java_stix_validator
+	docker run -t -i -p 8080:8080 stix/valiator
 
 If you're using boot2docker, you will need to access via VM’s host only interface IP 
 address:

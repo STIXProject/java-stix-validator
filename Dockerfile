@@ -40,14 +40,14 @@ RUN apt-get -y update
 RUN adduser --disabled-password --gecos '' nemonik  && adduser nemonik sudo && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Copy java-stix-validator project into the container
-WORKDIR /home/nemonik
+WORKDIR /home/stix
 COPY . java-stix-validator
-RUN chown -R nemonik java-stix-validator
-WORKDIR /home/nemonik/java-stix-validator
+RUN chown -R stix java-stix-validator
+WORKDIR /home/stix/java-stix-validator
 
 # Build the project
-RUN su nemonik -c './gradlew stage'
+RUN su stix -c './gradlew stage'
 
 # Expose and start the validator microservice
 EXPOSE 8080
-CMD ["/home/nemonik/java-stix-validator/build/install/java-stix-validator/bin/java-stix-validator"]
+CMD ["/home/stix/java-stix-validator/build/install/java-stix-validator/bin/java-stix-validator"]
