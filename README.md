@@ -19,6 +19,7 @@ be modified to support follow-on releases.
 
 An [instance of the validator is deployed to Heroku][heroku instance] and available for
 you to use, or you can [clone, build, and run an instance your own box](#building).
+Optionally, you can also create and run  a Docker container using the project's Dockerfile.
 
 ## <a name="versioning"></a>Versioning
 
