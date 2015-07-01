@@ -36,7 +36,7 @@ the [STIX discussion list][list].
 
 We'd welcome you contributing to java-stix-validator. Read the [CONTRIBUTING.MD](CONTRIBUTING.MD) for guidlines.
 
-## <a name="how-does-it-work"></a>How does it work.
+## <a name="how-this-works"></a>How this works
 
 The microservice backend in written in the [Spark Framework ][sparkjava], a Sinatra-like 
 lightweight Java web framework, and the front-end Single Page Application (SPA) is written in 
@@ -204,9 +204,9 @@ And then point your browser to http://$(boot2docker ip):8080 vice https://localh
 Use the tab to select the means for submitting your STIX document(s) for validation.
 
 The first tab accepts URLs to retrieve and validate STIX documents.  With the second 
-you can cut-and-paste the whole text of STIX document and submit for validation.  You 
-can drag and drop one or more STIX documents at a time into the dashed-line box for 
-validation.
+you can cut-and-paste the whole text of STIX document and submit for validation.  In 
+the third tab, you can drag and drop one or more STIX documents at a time into the 
+dashed-line box for validation.
 
 [heroku instance]:http://agile-journey-9583.herokuapp.com
 [bower]: http://bower.io/

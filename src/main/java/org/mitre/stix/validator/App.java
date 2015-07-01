@@ -15,12 +15,15 @@ import static spark.SparkBase.staticFileLocation;
  */
 public class App {
 	private static final int PORT = System.getenv("PORT") != null ? Integer.parseInt(System.getenv("PORT")) : 8080;
-
-	public static void main(String[] args) {
-		
+	
+	public App() {
 		port(PORT);
 		staticFileLocation("/public");
 
 		new ValidatorResource(new ValidatorService());
+	}
+
+	public static void main(String[] args) {
+		new App();
 	}
 }

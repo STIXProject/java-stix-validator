@@ -155,6 +155,8 @@ app.controller(
 								type: file.type, 
 								size: file.size, 
 								xml: xml};
+							
+							console.log(JSON.stringify(data));
 
 							$http({
 								method : 'POST',
