@@ -11,10 +11,9 @@ For more information, see [http://stix.mitre.org/][stix].
 
 ## <a name="overview"></a>Overview
 
-The validator uses java-stix to validate STIX documents. As java-stix is not a 
-one-for-one replacement for [python-stix][python-stix] neither is 
-[python-based stix-validator][stix-validator].  Meaning: this validator does
-not validate for best practices, and may pass documents [python-based stix-validator][stix-validator] 
+The validator uses java-stix to validate STIX documents. As java-stix is not a one-for-one replacement 
+for [python-stix][python-stix] neither is [python-based stix-validator][stix-validator].  Meaning: this 
+validator does not validate for best practices, and may pass documents [python-based stix-validator][stix-validator] 
 may fail. The validator supports v1.1.1 and v1.2.0 releases of the STIX schema, and can 
 be modified to support follow-on releases.
 
