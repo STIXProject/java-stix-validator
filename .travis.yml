@@ -1,20 +1,13 @@
-language:  java
+language: java
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
 before_install:
-  - chmod +x gradlew
-
-env: GRADLE_OPTS=-Dorg.gradle.daemon=true
+- chmod +x gradlew
 env: CI_OPTS=--stacktrace
-
-install: /bin/true
+install: "/bin/true"
 script: "./gradlew build -d"
-
 deploy:
   provider: heroku
   api_key:
-    secure: BbgJUQKfqlGchnFNAeS4IhTqUzNeavc0WDWNH8BzZaX8NulpjWUG2K8wVWh27RQpp9jBjuMeDSC08Z99geGu+i4bw69zVkZpzQ8sryxPy9Z8vV6xlEuO3HkaZHyz+ldIiAXr0SeUMdtiMruSIk/YCeFwKc2bKw89LkZyfalylNSoLr8GmGB+fLD8PcOQPAJQNQTvTlLTefGJjW7JWhshDIWM3BWsXBqlvLNjI93YRW1HrmN257OGF540n9qNQApsP1dML/dZsESkUFaX2PdH2uI7vH3orMlmwAXc/7wQNmaWdLu+IRdv08TZk17K9vWOuMFYYZBejh1IR7FuYVlpfJsK6b1NZXUofRl8vG4G013em/LF333haBXugIQ3SWPPPkzvn1Itp7VTbU+cc75b+VFwughEZinFDCsFZte9TN4rJAHdGVKwcp+aECbjP0ZOB0xqRJpky/nVdqdNUpgqnskO/CIjk2ZoNLAB9fkU5CP1TM+bc72BEiNFrvneiKOFnf4bjweMla0MyI/KwpHkuwzPvVah49rP3AnSSiS21avxUw6ZUoVPbcCNSQH3l6zAg9V4XYW+SDqkjdxlafwE5gA4e2oHU15h2O4EFgvsV9K/FNUWS0UkyZcpF02pTflikcA5VO6rZsAFGLIxVPZkw/No4LMFuAnmxWD8KeC94nE=
+    secure: QHh7DigLF2moyfOJiJX6T9LDGYx+detUvUudqmsNSEKOwo5r0CISKKjcSnRu1YJRUq2if6yuVgVypT73ca//oR77RNTrIPHE/92UY0ziYEezJFkyFeUcBMOxLs2tngrQj6lQQ4hXaI040Mz2gSB/Z4gEUCociQCBa9nUUGz78arRdc4X1YPuqcRKuTXCaK7Vj4jCk29zBcBzutu3hpalf4IWd8UZfvlXgvbaFFVAXEJHNzEDXNNNvayxgvf8RjaPgsDaJw+BXGDkQtzJoWQpfe2pYgybanu1ERrfjX5cHPPZqKEOpbfTSNcd54aU79Sfe/ld9UidgKP2sLCU0xxSAzEvsHA98qWLH8zcp/9ABT715N3WfyHW2bDCTCsimgRFy9Qdx8wQ4Oa88yJMLHU9gN8fBZLTPf4lrd69LDCrxZPR7zw/CdneMsC7v7EjCY7EgoJlvzASkwpCM0RKg7JIleT+A8Sz3zoOqJeOCUO2bsVAbUETBHumNsUjaLq62lO5wigHRA4WJJJSU5iwi7cznF3HCfEZBcnJYOu/Ra5q3ynQftSIFfS1QuNdwESItl1AsITSuje4oiKHTD527wGPfuL1C7zJaB6v+TVi+LmqqERH2SxhkG90GHFo8Zv4ibYIghCZO+PORxqKue6VMoa3GvCr3QXpVVRaQ3elU2uSf98=
   app: agile-journey-9583
-  on:
-    repo: nemonik/java-stix-validator
