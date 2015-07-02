@@ -74,6 +74,9 @@ task syncJavascript(type: Sync, dependsOn: installBower) {
 	include 'angular-spinner/angular-spinner.min.js*'
 	include 'angular-loading-spinner/angular-loading-spinner.js'
 	include 'spin.js/spin.js'
+	include 'angulartics/dist/angulartics.min.js'
+	include 'angulartics/dist/angulartics-ga.min.js'
+	
 	exclude 'ng-file-upload/ng-file-upload-all.min.js'
 }
 

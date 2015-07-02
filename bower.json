@@ -11,6 +11,7 @@
 		"angular-bootstrap": "~0.13.0",
 		"bootstrap": "~3.3.5",
 		"ng-file-upload": "~5.0.9",
-		"angular-loading-spinner": "~0.0.3"
+		"angular-loading-spinner": "~0.0.3",
+		"angulartics": "~0.19.0"
 	}
 }
