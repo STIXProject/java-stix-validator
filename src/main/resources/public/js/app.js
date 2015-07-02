@@ -113,6 +113,7 @@ app.controller(
 								config) {
 							console.log("Success");
 							if (data.validates === "true") {
+								$analytics.eventTrack(method + ' validation pass');
 								$scope.stix[tab].results.success = {
 									msg : "Passes validation.",
 									data : data,
@@ -120,6 +121,7 @@ app.controller(
 								};
 								$scope.stix[tab].results.fail.isCollapsed = true;
 							} else {
+								$analytics.eventTrack(method + ' validation fail');
 								$scope.stix[tab].results.fail = {
 									msg : "Fails validation.",
 									data : data,
@@ -133,6 +135,7 @@ app.controller(
 								config) {
 							console.log('Error: '
 								+ data);
+							$analytics.eventTrack(method + ' validation error');
 						});
 			}
 
@@ -144,7 +147,7 @@ app.controller(
 				if (files && files.length) {
 					for (var i = 0; i < files.length; i++) {
 						
-						$analytics.eventTrack('file validation');
+						$analytics.eventTrack('file validation req');
 						
 						var file = files[i];
 						var reader = new FileReader();
@@ -169,10 +172,12 @@ app.controller(
 											config) {
 										console.log("Success");
 										if (data.validates === "true") {
+											$analytics.eventTrack('file validation pass');
 											$scope.stix.fileTab.results.push({
 												msg : "Passes validation.",
 												data : data});
 										} else {
+											$analytics.eventTrack('file validation fail');
 											$scope.stix.fileTab.results.push({
 												msg : "Fails validation.",
 												data : data});
@@ -182,6 +187,7 @@ app.controller(
 											function(data, status, headers,
 													config) {
 												console.log("Error: " + data);
+												$analytics.eventTrack('file validation error');
 											});
 						};
 

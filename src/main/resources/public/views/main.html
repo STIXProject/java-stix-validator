@@ -29,7 +29,7 @@ See LICENSE for complete terms.
 						<alert ng-show="stix.urlTab.alert" type="{{stix.urlTab.alert.type}}" close="closeAlert('urlTab')">
 							{{stix.urlTab.alert.msg}}
 						</alert>
-						<button type="submit" class="btn btn-default" data-ng-click="validate('urlTab', 'url')" analytics-on="click" analytics-event="URL validation">
+						<button type="submit" class="btn btn-default" data-ng-click="validate('urlTab', 'url')" analytics-on="click" analytics-event="URL validation req">
 							Validate
 						</button>
 					</form>
@@ -63,7 +63,7 @@ See LICENSE for complete terms.
 						<alert ng-show="stix.xmlTab.alert" type="{{stix.xmlTab.alert.type}}" close="closeAlert('xmlTab')">
 							{{stix.xmlTab.alert.msg}}
 						</alert>
-						<button type="submit" class="btn btn-default" data-ng-click="validate('xmlTab', 'xml')" analytics-on="click" analytics-event="XML validation">
+						<button type="submit" class="btn btn-default" data-ng-click="validate('xmlTab', 'xml')" analytics-on="click" analytics-event="XML validation req">
 							Validate
 						</button>
 					</form>

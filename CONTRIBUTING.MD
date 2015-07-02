@@ -1,4 +1,4 @@
-# Contributing to java-stix
+# Contributing to java-stix-validator
 
 We'd welcome you contributing to java-stix-validator. Here are the guidelines to follow:
 

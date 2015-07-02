@@ -17,7 +17,7 @@ validator does not validate for best practices, and may pass documents [python-b
 may fail. The validator supports v1.1.1 and v1.2.0 releases of the STIX schema, and can 
 be modified to support follow-on releases.
 
-An [instance of the validator is deployed to Heroku][heroku instance] and available for
+A [Heroku hosted instance][heroku instance] of the validator is available for
 you to use, or you can [clone, build, and run an instance your own box](#building).
 Optionally, you can also create and run  a Docker container using the project's Dockerfile.
 
@@ -25,7 +25,7 @@ Optionally, you can also create and run  a Docker container using the project's 
 
 Releases of java-stix-validator will comply with the Semantic Versioning specification 
 at [http://semver.org/][semver]. Java-stix-validator is currently under active development; 
-see TODO.txt for a tentative roadmap.  Releases will be announced on the [STIX 
+see TODO.txt (if there is one) for a tentative roadmap.  Releases will be announced on the [STIX 
 discussion list][list]. 
 
 ## <a name="question"></a> Got a Question or Problem?
@@ -52,89 +52,90 @@ java-stix as resource files at the initialization of the ValidationService into
 individual, isolated classloaders:
 
 ```
-		stixSchemas = new HashMap<Version, Object>();
+stixSchemas = new HashMap<Version, Object>();
 
-		for (Version version : versions) {
-			try {
+for (Version version : versions) {
+	try {
 
-				ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
+		ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
 
-				Resource[] resources = patternResolver
-						.getResources("classpath:reflection-libs/v" + version
-								+ "/**/*.jar");
+		Resource[] resources = patternResolver
+				.getResources("classpath:reflection-libs/v" + version
+						+ "/**/*.jar");
 
-				ArrayList<URL> urls = new ArrayList<URL>();
+		ArrayList<URL> urls = new ArrayList<URL>();
 
-				// work around for URLClassLoader's inability to retrieve
-				// classes from Jars contained within Jars as resources
-				for (Resource resource : resources) {
-					ReadableByteChannel readableByteChannel = Channels
-							.newChannel(resource.getURL().openStream());
-					File tempFile = File.createTempFile("validator-", null);
-					FileOutputStream fileOutputStream = new FileOutputStream(
-							tempFile);
-					fileOutputStream.getChannel().transferFrom(
-							readableByteChannel, 0, Long.MAX_VALUE);
-					fileOutputStream.close();
-					urls.add(tempFile.toURI().toURL());
-				}
+		// work around for URLClassLoader's inability to retrieve
+		// classes from Jars contained within Jars as resources
+		for (Resource resource : resources) {
+			ReadableByteChannel readableByteChannel = Channels
+					.newChannel(resource.getURL().openStream());
+			File tempFile = File.createTempFile("validator-", null);
+			FileOutputStream fileOutputStream = new FileOutputStream(
+					tempFile);
+			fileOutputStream.getChannel().transferFrom(
+					readableByteChannel, 0, Long.MAX_VALUE);
+			fileOutputStream.close();
+			urls.add(tempFile.toURI().toURL());
+		}
 
-				@SuppressWarnings({ "resource" })
-				ClassLoader classLoader = new URLClassLoader(
-						urls.toArray(new URL[urls.size()]));
+		@SuppressWarnings({ "resource" })
+		ClassLoader classLoader = new URLClassLoader(
+				urls.toArray(new URL[urls.size()]));
 
-				Class<?> cls = classLoader
-						.loadClass("org.mitre.stix.STIXSchema");
+		Class<?> cls = classLoader
+				.loadClass("org.mitre.stix.STIXSchema");
 
-				@SuppressWarnings("rawtypes")
-				Constructor[] constructors = cls.getDeclaredConstructors();
-				constructors[0].setAccessible(true);
-				Object instance = constructors[0].newInstance();
+		@SuppressWarnings("rawtypes")
+		Constructor[] constructors = cls.getDeclaredConstructors();
+		constructors[0].setAccessible(true);
+		Object instance = constructors[0].newInstance();
 
-				Method setValidationErrorHandlerMethod = instance.getClass()
-						.getMethod("setValidationErrorHandler",
-								ErrorHandler.class);
+		Method setValidationErrorHandlerMethod = instance.getClass()
+				.getMethod("setValidationErrorHandler",
+						ErrorHandler.class);
 
-				setValidationErrorHandlerMethod.invoke(instance,
-						new Object[] { null });
+		setValidationErrorHandlerMethod.invoke(instance,
+				new Object[] { null });
 
-				System.out.println("Created STIXSchema for v " + version
-						+ " instance");
+		System.out.println("Created STIXSchema for v " + version
+				+ " instance");
 
-				stixSchemas.put(version, instance);
+		stixSchemas.put(version, instance);
 
-			} catch (ClassNotFoundException | SecurityException
-					| IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | IOException
-					| InstantiationException | NoSuchMethodException e) {
+	} catch (ClassNotFoundException | SecurityException
+			| IllegalAccessException | IllegalArgumentException
+			| InvocationTargetException | IOException
+			| InstantiationException | NoSuchMethodException e) {
 
-				throw new RuntimeException(e);
-			}
+		throw new RuntimeException(e);
+	}
 ```
 
 to permit the the validator's microservice to validate documents across the most 
 recent release of the STIX schema version:
 
 ```
-			for (Version knownVersion : stixSchemas.keySet()) {
-				if (lookForVersion.equals(knownVersion)) {
-					Object obj = stixSchemas.get(knownVersion);
+for (Version knownVersion : stixSchemas.keySet()) {
+	if (lookForVersion.equals(knownVersion)) {
+		Object obj = stixSchemas.get(knownVersion);
 
-					Method validateMethod;
-					try {
-						validateMethod = obj.getClass().getMethod("validate",
-								String.class);
-						validates = (boolean) validateMethod.invoke(obj,
-								xmlText);
-						break;
+		Method validateMethod;
+		try {
+			validateMethod = obj.getClass().getMethod("validate",
+					String.class);
+			validates = (boolean) validateMethod.invoke(obj,
+					xmlText);
+			break;
 
-					} catch (InvocationTargetException e) {
+		} catch (InvocationTargetException e) {
 
 ``` 
 
 #<a name="building"></a>Building
 
-java-stix-validator builds under Java8.
+java-stix-validator builds under Java8, and will not build under a 
+prior Java release.
 
 ## <a name="cloning"></a>Clone the repository
 
