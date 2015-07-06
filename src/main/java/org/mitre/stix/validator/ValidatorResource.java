@@ -18,7 +18,7 @@ public class ValidatorResource {
 	private final ValidatorService validatorService;
 
 	/**
-	 * Creates a validator resource of the validator service wired to specific
+	 * Creates a validator resource for validator service wired to specific
 	 * routes.
 	 * 
 	 * @param validatorService

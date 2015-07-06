@@ -17,6 +17,9 @@ public class JsonTransformer implements ResponseTransformer {
 
 	private Gson gson = new Gson();
 
+	/* (non-Javadoc)
+	 * @see spark.ResponseTransformer#render(java.lang.Object)
+	 */
 	@Override
 	public String render(Object model) {
 		if (model instanceof Response) {

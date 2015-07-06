@@ -16,6 +16,9 @@ import static spark.SparkBase.staticFileLocation;
 public class App {
 	private static final int PORT = System.getenv("PORT") != null ? Integer.parseInt(System.getenv("PORT")) : 8080;
 	
+	/**
+	 * Creates a new java-stix-validator application object
+	 */
 	public App() {
 		port(PORT);
 		staticFileLocation("/public");
