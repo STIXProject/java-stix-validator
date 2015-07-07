@@ -191,7 +191,7 @@ the following to create a container image for this Dockerfile via:
 
 Then create a container using the image you just created via:
 
-	docker run -t -i -p 8080:8080 stix/valiator
+	docker run -t -i -p 8080:8080 stix/validator
 
 If you're using boot2docker, you will need to access via VM’s host only interface IP 
 address:
