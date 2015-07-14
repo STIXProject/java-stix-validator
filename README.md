@@ -7,7 +7,7 @@ java-stix-validator is being developed under the official [STIXProject][stix pro
 
 For more information, see [http://stix.mitre.org/][stix].
 
-[![Build Status](https://api.travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator) [![Heroku](https://heroku-deployment-badges.herokuapp.com/?app=agile-journey-9583&style=flat)](http://agile-journey-9583.herokuapp.com)
+[![Build Status](https://api.travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator) [![Heroku](http://heroku-badge.herokuapp.com/?app=agile-journey-9583&style=flat)](http://agile-journey-9583.herokuapp.com)
 
 ## <a name="overview"></a>Overview
 
