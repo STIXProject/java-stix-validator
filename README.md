@@ -1,11 +1,9 @@
 # <a name="intro"></a>java-stix-validator
 
-A microservice and Single Page Application for validating STIX (Structured Threat Information eXpression) 
+A microservice and Single Page Application for validating Structured Threat Information eXpression (STIX™) 
 documents.
 
-java-stix-validator is being developed under the official [STIXProject][stix project]
-
-For more information, see [http://stix.mitre.org/][stix].
+java-stix-validator is being developed under the official [STIXProject][stix project].
 
 [![Build Status](https://api.travis-ci.org/STIXProject/java-stix-validator.svg)](https://travis-ci.org/STIXProject/java-stix-validator) [![Heroku](http://heroku-badge.herokuapp.com/?app=agile-journey-9583&style=flat)](http://agile-journey-9583.herokuapp.com)
 
@@ -25,12 +23,10 @@ Optionally, you can also create and run a Docker container using the project's D
 
 Releases of java-stix-validator will comply with the Semantic Versioning specification 
 at [http://semver.org/][semver]. Java-stix-validator is currently under active development; 
-see TODO.txt (if there is one) for a tentative roadmap.  Releases will be announced on the [STIX 
-discussion list][list]. 
+see TODO.txt (if there is one) for a tentative roadmap.
 
 ## <a name="question"></a> Got a Question or Problem?
-If you have questions about how to use java-stix-validator, please direct these to 
-the [STIX discussion list][list].
+If you have questions about how to use java-stix-validator, please direct these to  [stix@mitre.org](mailto:stix@mitre.org).
 
 ## <a name="contribute"></a>Contributing to java-stix-validator?
 
